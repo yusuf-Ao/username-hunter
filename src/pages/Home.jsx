@@ -36,7 +36,7 @@ const Home = () => {
           <div className='flex gap-2 justify-center'>
             <input
               type='search'
-              className='w-full p-4 ps-10 text-5xl bg-primary text-stone-400 focus:ring-blue-400 border block border-gray-300 rounded-lg  focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              className='w-full p-4 ps-10 text-lg bg-primary text-stone-400 focus:ring-blue-400 border block border-gray-300 rounded-lg  focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
               placeholder='Start typing . . .'
               value={input}
               onChange={handleInputChange}
@@ -44,10 +44,12 @@ const Home = () => {
           </div>
         </form>
       </div>
-      <div className='flex flex-wrap gap-4 h-2/3 sm:w-4/5 lg:w-3/5 overflow-y-auto scrollbar-1 m-auto justify-center justify-items-center'>
-        {platforms?.map((platform, index) => (
-          <ResultCard key={index} platform={platform} userInput={input} />
-        ))}
+      <div className='overflow-y-scroll scrollbar-1 my-4 h-2/3 w-full'>
+        <div className='flex flex-wrap gap-4 w-3/5 m-auto justify-center justify-items-center'>
+          {platforms?.map((platform, index) => (
+            <ResultCard key={index} platform={platform} userInput={input} />
+          ))}
+        </div>
       </div>
     </div>
   );
