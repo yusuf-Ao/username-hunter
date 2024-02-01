@@ -6,7 +6,7 @@ const serviceSlice = createSlice({
     name: 'service',
     initialState: {
         platforms: null,
-        results: null,
+        results: [],
         serviceLoading: false,
     },
     extraReducers: (builder) => {
@@ -18,19 +18,24 @@ const serviceSlice = createSlice({
             state.serviceLoading = true
         })
         builder.addCase(fetchSupportedPlatforms.rejected, (state, { payload }) => {
-            state.serviceLoading = true
+            state.serviceLoading = false
         })
 
         
         builder.addCase(huntUsername.fulfilled, (state, { payload }) => {
             state.serviceLoading = false
-            state.results = payload    
+            const index = state.results.findIndex(item => item.platform === payload.platform)
+            if (index === -1) {
+                state.results.push(payload);
+            } else {
+                state.results[index] = payload
+            }
         })
         builder.addCase(huntUsername.pending, (state, { payload }) => {
             state.serviceLoading = true
         })
         builder.addCase(huntUsername.rejected, (state, { payload }) => {
-            state.serviceLoading = true
+            state.serviceLoading = false
         })
     },
 })

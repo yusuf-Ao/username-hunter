@@ -2,47 +2,66 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import ResultCard from '../components/ResultCard';
 import { fetchSupportedPlatforms } from '../state/actions/service.actions';
-// Assuming you have an action like this to fetch data based on user input:
 
 const Home = () => {
-  const [input, setInput] = useState(''); // State to keep track of the input.
+  const [input, setInput] = useState('');
   const dispatch = useDispatch();
 
   const { platforms } = useSelector((state) => state.service);
 
-  // Fetch platforms when the component mounts for the first time.
   useEffect(() => {
     dispatch(fetchSupportedPlatforms());
-  }, [dispatch]);
-
-  console.log({ platforms });
+  }, []);
 
   const handleInputChange = (event) => {
     event.preventDefault();
-    setInput(event.target.value); // Update the state with the current input.
+    setInput(event.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleInputChange(e);
+  };
   return (
-    <div className='w-full h-[100vh] bg-[#1a1e22] flex flex-col'>
-      <div className='flex flex-col justify-center items-center h-[30%]'>
+    <div className='w-full h-screen bg-primary flex flex-col'>
+      <div className='flex flex-col justify-center items-center h-1/3 w-full'>
         <div className='font-medium text-3xl text-white font-poppins'>
           Username Hunter
         </div>
-        <form className='w-[80%] md:w-[40%] h-20 mt-4' autoComplete='off'>
-          <div className='relative'>
+        <form
+          onSubmit={handleSubmit}
+          className='w-2/5 h-20 mt-4'
+          autoComplete='off'
+        >
+          <div className='flex gap-2'>
+            <div className='inset-y-0 start-0 flex items-center ps-3 pointer-events-none'>
+              <svg
+                class='w-12 h-12 text-stone-500'
+                aria-hidden='true'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 20 20'
+              >
+                <path
+                  stroke='currentColor'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z'
+                />
+              </svg>
+            </div>
             <input
               type='search'
-              id='default-search'
-              className='block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500'
-              placeholder='Search...'
-              required
-              value={input} // Bind the input value to the state.
-              onChange={handleInputChange} // Update state on input change.
+              className='w-full p-4 ps-10 text-5xl bg-primary text-stone-400'
+              placeholder='Start typing...'
+              value={input}
+              onChange={handleInputChange}
             />
           </div>
         </form>
       </div>
-      <div className='flex gap-4 flex-wrap justify-center items-center h-[70%]  overflow-y-scroll scrollbar-1 p-10 bg-[#f6f8fa]'>
+      <div className='flex flex-wrap gap-4 h-2/3 sm:w-4/5 lg:w-3/5 overflow-y-auto scrollbar-1 m-auto justify-center justify-items-center'>
         {platforms?.map((platform, index) => (
           <ResultCard key={index} platform={platform} userInput={input} />
         ))}

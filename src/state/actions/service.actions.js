@@ -29,7 +29,6 @@ export const huntUsername = createAsyncThunk(
     async ({platform, username}, {rejectWithValue}) => {
         try {
             const { data } = await instance.post(`/hunt/${username}?platforms=${platform}`);
-            console.log(data.data);
             return data.data?.[0]
         } catch (error) {
             console.log(error)
