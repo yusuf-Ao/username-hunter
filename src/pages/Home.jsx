@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchSupportedPlatforms());
-  }, []);
+  }, [dispatch]);
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -20,12 +20,12 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleInputChange(e);
+    setInput(event.target.value);
   };
   return (
-    <div className='w-full h-screen bg-primary flex flex-col'>
+    <div className='w-full h-screen bg-primary flex flex-col justify-center items-center'>
       <div className='flex flex-col justify-center items-center h-1/3 w-full'>
-        <div className='font-medium text-3xl text-white font-poppins'>
+        <div className='font-normal text-2xl text-white font-poppins'>
           Username Hunter
         </div>
         <form
@@ -33,28 +33,11 @@ const Home = () => {
           className='w-2/5 h-20 mt-4'
           autoComplete='off'
         >
-          <div className='flex gap-2'>
-            <div className='inset-y-0 start-0 flex items-center ps-3 pointer-events-none'>
-              <svg
-                class='w-12 h-12 text-stone-500'
-                aria-hidden='true'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 20 20'
-              >
-                <path
-                  stroke='currentColor'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
-                  d='m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z'
-                />
-              </svg>
-            </div>
+          <div className='flex gap-2 justify-center'>
             <input
               type='search'
-              className='w-full p-4 ps-10 text-5xl bg-primary text-stone-400'
-              placeholder='Start typing...'
+              className='w-full p-4 ps-10 text-5xl bg-primary text-stone-400 focus:ring-blue-400 border block border-gray-300 rounded-lg  focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              placeholder='Start typing . . .'
               value={input}
               onChange={handleInputChange}
             />

@@ -18,13 +18,13 @@ const ResultCard = ({ platform, userInput }) => {
             <a
               href={result.url}
               target='_blanck'
-              className={`h-60 w-80 flex flex-colshadow-sm shadow-blue-700 p-6 border-2  text-stone-400 ${
+              className={`h-60 w-80 flex flex-col shadow-sm shadow-blue-700 p-6 border-2  text-stone-400 ${
                 result.available
                   ? 'border-green-700 hover:bg-green-800'
                   : 'border-red-700 hover:bg-red-800'
               }`}
             >
-              <div key={index} className='h-full'>
+              <div key={index} className='h-full w-full flex flex-col'>
                 <div className='flex items-center h-12 w-12 gap-2'>
                   <img
                     src={`/${result.platform}.png`}
@@ -34,13 +34,20 @@ const ResultCard = ({ platform, userInput }) => {
                     {result.platform}
                   </span>
                 </div>
+                <div className='flex justify-between h-full w-full items-end p-2'>
+                  <div className='flex flex-col'>
+                    <div className='text-xl'>{result.username}:</div>
+                    <div className='text-xl'>status:</div>
+                  </div>
 
-                <div className='text-xl'>
-                  {result.available ? 'Available' : 'Not Available'}
-                </div>
-
-                <div className='text-md text-stone-300 font-semibold bottom-0'>
-                  {result.verified ? 'VERIFIED' : 'NOT VERIFIED'}
+                  <div className='flex flex-col'>
+                    <div className='text-md text-stone-300 font-semibold'>
+                      {result.available ? 'Available' : 'Not Available'}
+                    </div>
+                    <div className='text-md text-stone-300 font-semibold'>
+                      {result.verified ? 'Verified' : 'Not Verified'}
+                    </div>
+                  </div>
                 </div>
               </div>
             </a>
